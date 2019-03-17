@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/runtime:2.1.9-alpine3.9 AS base
+EXPOSE 5000
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
