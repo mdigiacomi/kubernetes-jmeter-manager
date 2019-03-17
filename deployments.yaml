@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jmeter-manager
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jmeter-manager-svc
+  namespace: jmeter-manager
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+spec:
+  selector:
+    app: jmeter-manager
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jmeter-manager
+  namespace: jmeter-manager
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: jmeter-manager
+    spec:
+      containers:
+      - name: jmeter-manager
+        image: registry.gitlab.com/mdigiacomi-kubernetes/kubernetes-jmeter-manager:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      imagePullSecrets:
+        - name: gitlab-auth
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+  name: jmeter-manager-ingress
+  namespace: jmeter-manager
+spec:
+  rules:
+  - host: jmeter-manager.digitaladrenalin.net
+    http:
+      paths:
+      - backend:
+          serviceName: jmeter-manager-svc
+          servicePort: 80
