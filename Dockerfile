@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS base
-EXPOSE 5000
+EXPOSE 80
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
