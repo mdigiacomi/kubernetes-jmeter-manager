@@ -55,7 +55,7 @@ metadata:
   namespace: jmeter-manager
 spec:
   rules:
-  - host: jmeter-manager.digitaladrenalin.net
+  - host: jmeter-manager.hipsterconsulting.com
     http:
       paths:
       - backend:
