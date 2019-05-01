@@ -18,14 +18,14 @@ namespace JMeterManager.Controllers
         [HttpGet]
         public string Get()
         {
-            Uri connecturi = new Uri("activemq:ssl://activemq.digitaladrenalin.net:443");
+            Uri connecturi = new Uri(Environment.GetEnvironmentVariable("ActiveMQ-Server")); 
 
             Console.WriteLine("About to connect to " + connecturi);
 
             // NOTE: ensure the nmsprovider-activemq.config file exists in the executable folder.
             IConnectionFactory factory = new NMSConnectionFactory(connecturi);
 
-            using (IConnection connection = factory.CreateConnection())
+            using (IConnection connection = factory.CreateConnection(Environment.GetEnvironmentVariable("ActiveMQ-UserName"), Environment.GetEnvironmentVariable("ActiveMQ-Password")))
             using (ISession session = connection.CreateSession())
             {
 

@@ -35,6 +35,13 @@ spec:
       containers:
       - name: jmeter-manager
         image: registry.gitlab.com/mdigiacomi-kubernetes/kubernetes-jmeter-manager:latest
+        env:
+          - name: "ActiveMQ-Server"
+            value: "activemq:tcp://activemq.digitaladrenalin.net:61616"
+          - name: "ActiveMQ-UserName"
+            value: "admin"
+          - name: "ActiveMQ-Password"
+            value: "s5Nebeye"
         imagePullPolicy: Always
         resources:
           requests:
