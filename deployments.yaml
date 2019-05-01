@@ -41,7 +41,7 @@ spec:
           - name: "ActiveMQ-UserName"
             value: admin
           - name: "ActiveMQ-Password"
-            value: s5Nebeye
+            value: admin
           - name: "ASPNETCORE_ENVIRONMENT"
             value: "Development"
         imagePullPolicy: Always
