@@ -39,9 +39,9 @@ spec:
           - name: "ActiveMQ-Server"
             value: "tcp://mdigiacomi.ddns.net:61616"
           - name: "ActiveMQ-UserName"
-            value: "admin"
+            value: admin
           - name: "ActiveMQ-Password"
-            value: "s5Nebeye"
+            value: s5Nebeye
           - name: "ASPNETCORE_ENVIRONMENT"
             value: "Development"
         imagePullPolicy: Always
