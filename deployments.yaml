@@ -37,11 +37,13 @@ spec:
         image: registry.gitlab.com/mdigiacomi-kubernetes/kubernetes-jmeter-manager:latest
         env:
           - name: "ActiveMQ-Server"
-            value: "activemq:tcp://activemq.digitaladrenalin.net:61616"
+            value: "tcp://mdigiacomi.ddns.net:61616"
           - name: "ActiveMQ-UserName"
             value: "admin"
           - name: "ActiveMQ-Password"
             value: "s5Nebeye"
+          - name: "ASPNETCORE_ENVIRONMENT"
+            value: "Development"
         imagePullPolicy: Always
         resources:
           requests:

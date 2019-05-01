@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -12,16 +12,19 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "ActiveMQ-UserName": "admin",
+        "ActiveMQ-Server": "tcp://mdigiacomi.ddns.net:61616",
+        "ActiveMQ-Password": "s5Nebeye",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "JMeter_Manager": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }

@@ -49,7 +49,7 @@ namespace JMeterManager.Controllers
                     {
                         producer.Send(request);
                     }
-                    connection.Close(); 
+                    connection.Close();
                 }
             }
             return "Done";
