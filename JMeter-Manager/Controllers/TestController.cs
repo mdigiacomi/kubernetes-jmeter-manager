@@ -18,7 +18,7 @@ namespace JMeterManager.Controllers
         [HttpGet]
         public string Get()
         {
-            Uri connecturi = new Uri("activemq:tcp://activemq.digitaladrenalin.net:61616");
+            Uri connecturi = new Uri("activemq:ssl://activemq.digitaladrenalin.net");
 
             Console.WriteLine("About to connect to " + connecturi);
 
