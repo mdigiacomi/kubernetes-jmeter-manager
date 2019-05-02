@@ -18,12 +18,10 @@ namespace JMeterManager.Controllers
         [HttpGet]
         public string Get()
         {
-            Uri connecturi = new Uri(Environment.GetEnvironmentVariable("ActiveMQ-Server")); 
-
-            Console.WriteLine("About to connect to " + connecturi);
+            Console.WriteLine("About to connect to " + Environment.GetEnvironmentVariable("ActiveMQ-Server"));
 
             // NOTE: ensure the nmsprovider-activemq.config file exists in the executable folder.
-            IConnectionFactory factory = new NMSConnectionFactory(connecturi);
+            IConnectionFactory factory = new NMSConnectionFactory(Environment.GetEnvironmentVariable("ActiveMQ-Server"));
 
             Console.WriteLine("UserName: " + Environment.GetEnvironmentVariable("ActiveMQ-UserName"));
             Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("ActiveMQ-Password"));

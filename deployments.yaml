@@ -37,7 +37,7 @@ spec:
         image: registry.gitlab.com/mdigiacomi-kubernetes/kubernetes-jmeter-manager:latest
         env:
           - name: "ActiveMQ-Server"
-            value: "tcp://mdigiacomi.ddns.net:61616"
+            value: "activemq:tcp://mdigiacomi.ddns.net:61616"
           - name: "ActiveMQ-UserName"
             value: admin
           - name: "ActiveMQ-Password"
