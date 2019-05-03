@@ -19,39 +19,47 @@ namespace JMeterManager.Controllers
         public string Get()
         {
             Console.WriteLine("About to connect to " + Environment.GetEnvironmentVariable("ActiveMQ-Server"));
-
-            // NOTE: ensure the nmsprovider-activemq.config file exists in the executable folder.
-            IConnectionFactory factory = new NMSConnectionFactory(Environment.GetEnvironmentVariable("ActiveMQ-Server"));
-
-            Console.WriteLine("UserName: " + Environment.GetEnvironmentVariable("ActiveMQ-UserName"));
-            Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("ActiveMQ-Password"));
-
-            using (IConnection connection = factory.CreateConnection())
-            using (ISession session = connection.CreateSession())
+            try
             {
+                // NOTE: ensure the nmsprovider-activemq.config file exists in the executable folder.
+                IConnectionFactory factory = new NMSConnectionFactory(Environment.GetEnvironmentVariable("ActiveMQ-Server"));
 
-                IDestination destination = SessionUtil.GetDestination(session, "queue://JMeter");
-                Console.WriteLine("Using destination: " + destination);
+                Console.WriteLine("UserName: " + Environment.GetEnvironmentVariable("ActiveMQ-UserName"));
+                Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("ActiveMQ-Password"));
 
-                // Create a consumer and producer
-                using (IMessageProducer producer = session.CreateProducer(destination))
+                using (IConnection connection = factory.CreateConnection())
+                using (ISession session = connection.CreateSession())
                 {
-                    // Start the connection so that messages will be processed.
-                    connection.Start();
-                    producer.DeliveryMode = MsgDeliveryMode.Persistent;
 
-                    // Send a message
-                    ITextMessage request = session.CreateTextMessage(JMSMessage.RequestId);
-                    request.NMSCorrelationID = new Guid().ToString();
-                    request.Properties["TeamID"] = "DevOps";
-                    request.Properties["Application"] = "DevOps-Testing";
+                    IDestination destination = SessionUtil.GetDestination(session, "queue://JMeter");
+                    Console.WriteLine("Using destination: " + destination);
 
-                    for (int i = 0; i < 100; i++)
+                    // Create a consumer and producer
+                    using (IMessageProducer producer = session.CreateProducer(destination))
                     {
-                        producer.Send(request);
+                        // Start the connection so that messages will be processed.
+                        connection.Start();
+                        producer.DeliveryMode = MsgDeliveryMode.Persistent;
+
+                        // Send a message
+                        ITextMessage request = session.CreateTextMessage(JMSMessage.RequestId);
+                        request.NMSCorrelationID = new Guid().ToString();
+                        request.Properties["TeamID"] = "DevOps";
+                        request.Properties["Application"] = "DevOps-Testing";
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            producer.Send(request);
+                        }
+                        connection.Close();
                     }
-                    connection.Close();
                 }
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: " + error.Message);
+                Console.WriteLine("Error: " + error.StackTrace);
+                throw;
             }
             return "Done";
         }
