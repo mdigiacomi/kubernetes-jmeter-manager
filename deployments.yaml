@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: jmeter-manager
-        image: registry.gitlab.com/mdigiacomi-kubernetes/kubernetes-jmeter-manager:latest
+        image: michaeldigiacomi/jmeter-manager:latest
         env:
           - name: "ActiveMQ-Server"
             value: "activemq:tcp://mdigiacomi.ddns.net:61616"

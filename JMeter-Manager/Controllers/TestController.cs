@@ -59,7 +59,6 @@ namespace JMeterManager.Controllers
             {
                 Console.WriteLine("Error: " + error.Message);
                 Console.WriteLine("Error: " + error.StackTrace);
-                throw;
             }
             return "Done";
         }
