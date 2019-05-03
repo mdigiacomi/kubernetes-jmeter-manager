@@ -21,7 +21,7 @@ namespace JMeterManager.Controllers
             Console.WriteLine("About to connect to " + Environment.GetEnvironmentVariable("ActiveMQ-Server"));
             try
             {
-                Uri ActiveURL = new Uri(Environment.GetEnvironmentVariable("ActiveMQ-Server"));
+                Uri ActiveURL = new Uri("activemq:tcp://mdigiacomi.ddns.net:61616");
                 // NOTE: ensure the nmsprovider-activemq.config file exists in the executable folder.
                 IConnectionFactory factory = new NMSConnectionFactory(ActiveURL);
 
